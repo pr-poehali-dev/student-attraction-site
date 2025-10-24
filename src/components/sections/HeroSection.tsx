@@ -1,13 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 export default function HeroSection() {
   return (
     <section id="home" className="pt-32 pb-20 px-4">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <Badge className="mb-4 bg-accent/20 text-accent-foreground border-accent">
               Образование будущего
             </Badge>
@@ -44,8 +50,14 @@ export default function HeroSection() {
                 <div className="text-gray-600">Рейтинг</div>
               </div>
             </div>
-          </div>
-          <div className="relative animate-slide-up">
+          </motion.div>
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl"></div>
             <div className="relative bg-white/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-100 shadow-xl">
               <div className="grid grid-cols-2 gap-4">
@@ -71,7 +83,7 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

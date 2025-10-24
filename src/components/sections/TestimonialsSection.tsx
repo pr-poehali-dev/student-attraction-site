@@ -1,6 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 interface Testimonial {
   id: number;
@@ -19,7 +20,13 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
   return (
     <section id="testimonials" className="py-20 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <Badge className="mb-4 bg-accent/10 text-accent border-accent">
             Отзывы студентов
           </Badge>
@@ -29,10 +36,17 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Узнайте, как наши студенты изменили свою карьеру и жизнь
           </p>
-        </div>
+        </motion.div>
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={testimonial.id} className="border-2 hover:border-primary/30 transition-all hover:shadow-lg animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+            <motion.div
+              key={testimonial.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+            >
+              <Card className="border-2 hover:border-primary/30 transition-all hover:shadow-lg h-full">
               <CardContent className="pt-6">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="text-4xl">{testimonial.avatar}</div>
@@ -49,6 +63,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 <p className="text-gray-700 leading-relaxed">{testimonial.text}</p>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>

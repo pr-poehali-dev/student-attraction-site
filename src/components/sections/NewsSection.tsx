@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 interface NewsItem {
   id: number;
@@ -19,7 +20,13 @@ export default function NewsSection({ news }: NewsSectionProps) {
   return (
     <section id="news" className="py-20 px-4 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary">
             Новости и события
           </Badge>
@@ -29,10 +36,18 @@ export default function NewsSection({ news }: NewsSectionProps) {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Актуальные новости, события и обновления нашей платформы
           </p>
-        </div>
+        </motion.div>
         <div className="grid md:grid-cols-3 gap-8">
           {news.map((item, index) => (
-            <Card key={item.id} className="hover:shadow-xl transition-all hover:-translate-y-1 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -4 }}
+            >
+              <Card className="hover:shadow-xl transition-shadow duration-300 h-full">
               <CardHeader>
                 <div className="flex justify-between items-center mb-2">
                   <Badge className="bg-primary/10 text-primary">
@@ -55,6 +70,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
                 </Button>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>

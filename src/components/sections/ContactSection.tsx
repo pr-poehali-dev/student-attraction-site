@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 interface ContactSectionProps {
   formData: {
@@ -21,7 +22,13 @@ export default function ContactSection({ formData, setFormData, handleSubmit }: 
   return (
     <section id="contact" className="py-20 px-4">
       <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <Badge className="mb-4 bg-primary/10 text-primary border-primary">
             Контакты
           </Badge>
@@ -31,9 +38,15 @@ export default function ContactSection({ formData, setFormData, handleSubmit }: 
           <p className="text-xl text-gray-600">
             Свяжитесь с нами и мы ответим на все ваши вопросы
           </p>
-        </div>
+        </motion.div>
         <div className="grid md:grid-cols-2 gap-8">
-          <Card className="border-2">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="border-2">
             <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -85,7 +98,14 @@ export default function ContactSection({ formData, setFormData, handleSubmit }: 
               </form>
             </CardContent>
           </Card>
-          <div className="space-y-6">
+          </motion.div>
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <Card className="border-2 hover:border-primary/30 transition-colors">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-4">
@@ -128,7 +148,7 @@ export default function ContactSection({ formData, setFormData, handleSubmit }: 
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

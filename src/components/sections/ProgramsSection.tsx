@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 interface Program {
   id: number;
@@ -21,7 +22,13 @@ export default function ProgramsSection({ programs }: ProgramsSectionProps) {
   return (
     <section id="programs" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <Badge className="mb-4 bg-primary/10 text-primary border-primary">
             Наши программы
           </Badge>
@@ -31,10 +38,18 @@ export default function ProgramsSection({ programs }: ProgramsSectionProps) {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Практические курсы с гарантией результата и поддержкой на каждом этапе обучения
           </p>
-        </div>
+        </motion.div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {programs.map((program, index) => (
-            <Card key={program.id} className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+            <motion.div
+              key={program.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -8 }}
+            >
+              <Card className="hover:shadow-xl transition-shadow duration-300 border-2 hover:border-primary/20 h-full">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <Badge variant="outline" className="bg-accent/10">
@@ -66,6 +81,7 @@ export default function ProgramsSection({ programs }: ProgramsSectionProps) {
                 </Button>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>
